@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Root } from "./components/Root";
-import Users from "./components/Users/Users";
+import Users from "./components/users/Users";
 import { Container } from "react-bootstrap";
 import HeaderNavigation from "./components/HeaderNavigation";
 
