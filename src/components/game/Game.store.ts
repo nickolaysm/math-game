@@ -74,6 +74,7 @@ class GameStore {
         this.game.gameIsFinished = false;
         this.game.winnerPlayerNumber = 0;
         this.game.playerStep = 1;
+        this.game.gameLog = [];
         this.strategy = getStrategy(this.game.player2Type)
     }
 

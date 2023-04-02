@@ -1,9 +1,10 @@
 import {observer, useLocalObservable} from "mobx-react-lite"
-import {gameStore, IGameLog, PlayerType} from "./Game.store";
+import {gameStore, PlayerType} from "./Game.store";
 import Modal from 'react-bootstrap/Modal';
 import React from "react";
-import {Button, ButtonGroup, Col, Container, Row} from "react-bootstrap";
+import {Button} from "react-bootstrap";
 import Form from 'react-bootstrap/Form';
+import GameView from "./GameView";
 
 const Game = () =>{
 
@@ -49,13 +50,7 @@ const Game = () =>{
         console.log("onSelectChange", event.target.value);
         game.initPlayer2Type = event.target.value;
     }
-    const logToHTML = (
-        gameStore.game.gameLog.map((elem: IGameLog)=>{
-            return(
-                <div>Игрок {elem.playerNumber}, взял: {elem.playerTaked}, осталось: {elem.total}</div>
-            )
-        })
-    )
+
     const handleSubmit = (event) => {
 
         if(!game.checkInputValue()){
@@ -131,7 +126,7 @@ const Game = () =>{
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                Выиграл игрок {gameStore.game.winnerPlayerNumber}
+                Выиграл Игрок {gameStore.game.winnerPlayerNumber}
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="primary" onClick={game.open}>
@@ -147,84 +142,7 @@ const Game = () =>{
             {showStartModal2}
             {endGameModal}
             <Button variant="outline-primary" onClick={game.open}>Начать новую игру</Button>
-            <h1 className={"text-center"}>
-                Куча спичек:
-            </h1>
-            <h1 className={"text-center"} style={{"fontSize":'10em'}}>
-                {gameStore.game.totalCount}
-            </h1>
-            <Container>
-                <Row>
-                    <Col lg={9}>
-                        <Container>
-                            <Row>
-                                <Col>
-                                    <h1 className={"text-left"}>
-                                        Игрок 1
-                                    </h1>
-                                </Col>
-                                <Col>
-                                    <h1 className={"text-left"}>
-                                        Игрок 2
-                                    </h1>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <h3 className={"text-left"}>
-                                        Последний ход: {gameStore.game.user1LastStep}
-                                    </h3>
-                                </Col>
-                                <Col>
-                                    <h3 className={"text-left"}>
-                                        Последний ход: {gameStore.game.user2LastStep}
-                                    </h3>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <h3 className={"text-left"}>
-                                        Всего взято спичек: {gameStore.game.user1Taked}
-                                    </h3>
-                                </Col>
-                                <Col>
-                                    <h3 className={"text-left"}>
-                                        Всего взято спичек: {gameStore.game.user2Taked}
-                                    </h3>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <span className={"fs-3"}>
-                                    Взять:
-                                    </span>
-                                    <ButtonGroup size="lg">
-                                        <Button variant="outline-primary" onClick={()=>gameStore.nextStep(1)}>1</Button>
-                                        <Button variant="outline-primary" onClick={()=>gameStore.nextStep(2)}>2</Button>
-                                        <Button variant="outline-primary" onClick={()=>gameStore.nextStep(3)}>3</Button>
-                                        <Button variant="outline-primary" onClick={()=>gameStore.nextStep(4)}>4</Button>
-                                    </ButtonGroup>
-                                </Col>
-                                <Col></Col>
-                            </Row>
-                        </Container>
-                    </Col>
-                    <Col lg={3}>
-                        <Container>
-                            <Row>
-                                <Col>
-                                    <h3>Лог игры:</h3>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    {logToHTML}
-                                </Col>
-                            </Row>
-                        </Container>
-                    </Col>
-                </Row>
-            </Container>
+            <GameView/>
         </div>
     )
 }
