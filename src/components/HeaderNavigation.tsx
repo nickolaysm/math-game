@@ -16,6 +16,9 @@ const HeaderNavigation = () => {
           <Nav.Link as={Link} to="/game">
             Игра
           </Nav.Link>
+          <Nav.Link as={Link} to="/solve">
+            Решения
+          </Nav.Link>
         </Nav>
       </Navbar>
     </div>

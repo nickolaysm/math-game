@@ -1,3 +1,3 @@
 export const Root = () => {
-  return <div>Root</div>;
+  return <div>Привет! Вы попали в игру "Спички"</div>;
 };
